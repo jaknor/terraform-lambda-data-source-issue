@@ -16,7 +16,7 @@ The first error is when I try and use the data source in conjunction with a regu
 * Navigate to folder example-1
 * Execute terraform init
 * Execute terraform apply
-* When prompted for lambda_package_file_path enter ./package1.zip
+* When prompted for lambda_package_file_path enter  
 * Inside example.tf uncomment the following:
   * The variable named lambda_previous_version_percentage
   * The data source named existing_lambda_func
@@ -45,13 +45,13 @@ To get around the error above I tried hard coding the percentage. In this case t
   * The output previous_version_number
 * Execute terraform apply
 * When prompted for lambda_package_file_path enter ./package2.zip
-* You should receive 2 outputs, the current and the previous version
+* You should receive 2 outputs, the current and the previous version (to me this proves the data source is set up correctly)
 * Inside example.tf uncomment the following:
   * The routing_config inside lambda_func_alias
 * Execute terraform apply
 * When prompted for lambda_package_file_path enter ./package3.zip
 
-You will get an error
+You will get a validation error when it tries to apply the change stating that the version number of the additional_version_weights is not a valid number.
 
 
 
