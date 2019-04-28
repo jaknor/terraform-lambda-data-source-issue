@@ -10,7 +10,12 @@ locals {
   alias_name = "production"
 }
 
-variable lambda_package_file_path { }
+variable lambda_package_file_path {
+    default = "./package.zip"
+ }
+
+#  variable lambda_previous_version_percentage {
+#  }
 
 # data "aws_lambda_function" "existing_lambda_func" {
 #   function_name = "${local.component_name}"
@@ -41,7 +46,7 @@ resource "aws_lambda_alias" "lambda_func_alias" {
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "${local.component_name}-${data.aws_region.current.name}"
+  name = "${local.component_name}"
   assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy_document.json}"
 }
 
@@ -68,7 +73,3 @@ resource "aws_iam_role_policy_attachment" "lambda_exec_policy_attach" {
 output "version_number" {
   value = "${aws_lambda_function.lambda_func.version}"
 }
-
-# output "test" {
-#   value = "${data.aws_lambda_function.existing_lambda_func.version}"
-# }
