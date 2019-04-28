@@ -1,18 +1,21 @@
 terraform {
-  required_version = "~>0.11.13"
+  required_version = "0.11.13"
+
+  required_providers = {
+    aws = "2.8.0"
+  }
 }
 
 provider "aws" {
+
 }
 
 locals {
-  component_name = "terraform-issue-demo"
+  component_name = "terraform-issue-demo-1"
   alias_name = "production"
 }
 
-variable lambda_package_file_path {
-    default = "./package.zip"
- }
+variable lambda_package_file_path { }
 
 #  variable lambda_previous_version_percentage {
 #  }
