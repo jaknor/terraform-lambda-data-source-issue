@@ -1,3 +1,23 @@
+# UPDATE 2019-05-01
+After asking about this issue on [stackoverflow](https://stackoverflow.com/questions/55890700/why-can-i-not-use-aws-lambda-function-datasource-inside-aws-lambda-alias-routing/) I received an explanation on what I was doing wrong. I have updated this repository with a solution to show the way it should be done.
+
+## Steps to deploy solution
+
+* Pull repository
+* Navigate to folder solution
+* Execute terraform init
+* Execute terraform apply
+* When prompted for lambda_package_file_path enter ./package1.zip
+* Inside example.tf uncomment the following:
+  * The variable named lambda_previous_version_percentage
+  * The data source named existing_lambda_func
+  * The routing_config inside lambda_func_alias
+* Execute terraform apply
+* * When prompted for lambda_package_file_path enter ./package2.zip
+* When prompted for var.lambda_previous_version_percentage enter a valid float value (I.E. 0.5)
+
+Once complete, try to execute the lambda using the production alias. You will see that you get different responses depending on which lambda that is executed.
+
 # Unable to use lambda data source in lambda alias
 
 I am experimenting with a blue/green deployment setup for lambdas using terraform and lambda aliases.
@@ -16,7 +36,7 @@ The first error is when I try and use the data source in conjunction with a regu
 * Navigate to folder example-1
 * Execute terraform init
 * Execute terraform apply
-* When prompted for lambda_package_file_path enter  
+* When prompted for lambda_package_file_path enter ./package1.zip
 * Inside example.tf uncomment the following:
   * The variable named lambda_previous_version_percentage
   * The data source named existing_lambda_func
